@@ -1,13 +1,11 @@
-package ni40034974.track2.bank.ni40034974_bank.service;
+package ni40034974.track2.bank.ni40034974_bank.account;
 
 
 import ni40034974.track2.bank.ni40034974_bank.exception.AccountTypeExistsException;
 import ni40034974.track2.bank.ni40034974_bank.exception.EntityNotFoundException;
 
 import ni40034974.track2.bank.ni40034974_bank.exception.InsufficientFundsException;
-import ni40034974.track2.bank.ni40034974_bank.model.Account;
-import ni40034974.track2.bank.ni40034974_bank.model.Customer;
-import ni40034974.track2.bank.ni40034974_bank.repository.AccountRepository;
+import ni40034974.track2.bank.ni40034974_bank.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,10 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     public Account createAccount(Customer customer, String accountType) {
+        //allow only current and savings account types
+        if(!accountType.isEmpty() && !accountType.equals("savings") && !accountType.equals("current")){
+            throw new IllegalStateException("Invalid Account type");
+        }
         // Check if the customer already has an account of the given type
         List<Account> existingAccounts = accountRepository.findByCustomerAndAccountType(customer, accountType);
         if (!existingAccounts.isEmpty()) {

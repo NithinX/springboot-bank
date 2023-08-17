@@ -1,7 +1,7 @@
-package ni40034974.track2.bank.ni40034974_bank.repository;
+package ni40034974.track2.bank.ni40034974_bank.account;
 
-import ni40034974.track2.bank.ni40034974_bank.model.Account;
-import ni40034974.track2.bank.ni40034974_bank.model.Customer;
+import ni40034974.track2.bank.ni40034974_bank.account.Account;
+import ni40034974.track2.bank.ni40034974_bank.customer.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

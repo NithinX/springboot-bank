@@ -1,4 +1,4 @@
-package ni40034974.track2.bank.ni40034974_bank.model;
+package ni40034974.track2.bank.ni40034974_bank.account;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ni40034974.track2.bank.ni40034974_bank.exception.InsufficientFundsException;
+import ni40034974.track2.bank.ni40034974_bank.customer.Customer;
 
 import java.math.BigDecimal;
 
@@ -21,7 +22,7 @@ import java.math.BigDecimal;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long accountNum;
     @ManyToOne
     private Customer customer;
     private String accountType; // savings, current, etc.

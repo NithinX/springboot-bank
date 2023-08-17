@@ -1,10 +1,8 @@
-package ni40034974.track2.bank.ni40034974_bank.controller;
+package ni40034974.track2.bank.ni40034974_bank.account;
 
-import ni40034974.track2.bank.ni40034974_bank.model.Account;
-import ni40034974.track2.bank.ni40034974_bank.service.AccountService;
-import ni40034974.track2.bank.ni40034974_bank.model.Customer;
+import ni40034974.track2.bank.ni40034974_bank.customer.Customer;
 
-import ni40034974.track2.bank.ni40034974_bank.service.CustomerService;
+import ni40034974.track2.bank.ni40034974_bank.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +51,7 @@ public class AccountController {
         return ResponseEntity.ok(accounts);
     }
 
-    @PostMapping
+    @PostMapping("/transfer")
     public ResponseEntity<String> transferFunds(
             @RequestParam Long fromAccountId,
             @RequestParam Long toAccountId,
