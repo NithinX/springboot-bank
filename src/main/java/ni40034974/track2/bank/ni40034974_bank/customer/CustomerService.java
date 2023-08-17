@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class CustomerService {
+public class CustomerService implements CustomerServiceI{
 
     private final CustomerRepository customerRepository;
     private AccountRepository accountRepository;

@@ -45,6 +45,12 @@ public class AccountController {
         return ResponseEntity.ok(account);
     }
 
+    @GetMapping("/{accountId}/balance")
+    public ResponseEntity<BigDecimal> getBalance(@PathVariable Long accountId){
+        BigDecimal balance = accountService.getBalance(accountId);
+        return ResponseEntity.ok(balance);
+    }
+
     @GetMapping("/{customerId}")
     public ResponseEntity<List<Account>> getAccountsByCustomer(@PathVariable Long customerId) {
         Customer customer = customerService.getCustomerById(customerId);

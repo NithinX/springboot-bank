@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class AccountService {
+public class AccountService implements AccountServiceI {
 
     private final AccountRepository accountRepository;
 
@@ -73,4 +73,8 @@ public class AccountService {
         }
     }
 
+    public BigDecimal getBalance(Long accountId) {
+        Account account =accountRepository.findById(accountId).orElseThrow(()-> new EntityNotFoundException("Account not found"));
+        return account.getBalance();
+    }
 }
