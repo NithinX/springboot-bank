@@ -10,9 +10,10 @@ import java.util.List;
 public interface AccountServiceI {
 
     Account createAccount(Customer customer, String accountType);
+    void deleteAccount(Long accountId);
     Account deposit(Long accountId, BigDecimal amount);
     Account withdraw(Long accountId, BigDecimal amount);
-    Account getBalance(Long accountId);
+    BigDecimal getBalance(Long accountId);
     List<Account> getAccountsByCustomer(Customer customer);
     void transferFunds(Long fromAccountId, Long toAccountId, BigDecimal amount);
 }

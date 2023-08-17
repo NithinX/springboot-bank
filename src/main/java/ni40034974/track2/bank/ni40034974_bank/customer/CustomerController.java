@@ -38,7 +38,7 @@ public class CustomerController {
         if(!Customerlist.isEmpty())
             return ResponseEntity.ok(Customerlist);
         else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No customer found",HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{customerId}")
@@ -50,6 +50,6 @@ public class CustomerController {
     @DeleteMapping( "/{customerId}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId){
         customerService.deleteCustomer(customerId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted",HttpStatus.OK);
     }
 }
