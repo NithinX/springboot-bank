@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class AccountService {
 
+    private final AccountRepository accountRepository;
+
     @Autowired
-    private AccountRepository accountRepository;
+    public AccountService(AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
+    }
 
     public Account createAccount(Customer customer, String accountType) {
         //allow only current and savings account types

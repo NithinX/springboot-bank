@@ -4,6 +4,7 @@ import ni40034974.track2.bank.ni40034974_bank.customer.Customer;
 
 import ni40034974.track2.bank.ni40034974_bank.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,10 @@ public class AccountController {
     public ResponseEntity<List<Account>> getAccountsByCustomer(@PathVariable Long customerId) {
         Customer customer = customerService.getCustomerById(customerId);
         List<Account> accounts = accountService.getAccountsByCustomer(customer);
-        return ResponseEntity.ok(accounts);
+        if(accounts.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        else
+            return ResponseEntity.ok(accounts);
     }
 
     @PostMapping("/transfer")

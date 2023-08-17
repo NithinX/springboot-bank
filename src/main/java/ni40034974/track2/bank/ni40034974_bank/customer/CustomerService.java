@@ -1,6 +1,7 @@
 package ni40034974.track2.bank.ni40034974_bank.customer;
 
-import jakarta.transaction.Transactional;
+import ni40034974.track2.bank.ni40034974_bank.account.Account;
+import ni40034974.track2.bank.ni40034974_bank.account.AccountRepository;
 import ni40034974.track2.bank.ni40034974_bank.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,15 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
+    }
+    @Autowired
+    public void AccountService(AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
     }
 
     public Customer createCustomer(Customer customer) {
@@ -75,4 +81,17 @@ public class CustomerService {
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
     }
+
+    public void deleteRelatedAccounts(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new IllegalStateException("Customer not found with ID: " + customerId));
+        List<Account> relatedAccounts = accountRepository.findByCustomer(customer);
+        accountRepository.deleteAll(relatedAccounts);
+    }
+
+    public void deleteCustomer(Long customerId) {
+        deleteRelatedAccounts(customerId);
+        customerRepository.deleteById(customerId);
+    }
+
 }
