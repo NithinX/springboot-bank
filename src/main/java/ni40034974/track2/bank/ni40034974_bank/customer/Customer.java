@@ -6,6 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ni40034974.track2.bank.ni40034974_bank.address.Address;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.time.Period;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table
 public class Customer {
     @Id

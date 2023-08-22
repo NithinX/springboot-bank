@@ -11,6 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ni40034974.track2.bank.ni40034974_bank.exception.InsufficientFundsException;
 import ni40034974.track2.bank.ni40034974_bank.customer.Customer;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 
@@ -39,6 +42,9 @@ public class Account {
     }
 
     public void withdraw(BigDecimal amount) {
+        if(amount.compareTo(BigDecimal.ZERO) < 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Amount must be positive");
+        }
         if (balance.compareTo(amount) >= 0) {
             balance = balance.subtract(amount);
         } else {
